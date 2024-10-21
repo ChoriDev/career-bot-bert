@@ -1,10 +1,7 @@
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
 from fastapi import FastAPI
+from model import Item
 from evaluator import Evaluator
-
-class Item(BaseModel):
-    sentence: str
 
 app = FastAPI()
 
