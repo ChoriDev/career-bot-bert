@@ -1,6 +1,7 @@
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from fastapi import FastAPI
+from evaluator import Evaluator
 
 class Item(BaseModel):
     sentence: str
@@ -18,5 +19,6 @@ app.add_middleware(
 
 @app.post('/grade')
 async def receive_data(item: Item):
-    print('Received sentence:', item.sentence)
-    return {"received_sentence": item.sentence}
+    evaluator = Evaluator()
+    grade = evaluator.predict(item.sentence)
+    return {'grade': grade}
